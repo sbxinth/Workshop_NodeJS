@@ -40,7 +40,6 @@ router.post("/createInvoice", async function (req, res, next) {
     getdataforcal.map(async (item) => {
       try {
         let id = item.product._id;
-        console.log(id, "<------ here");
         if (!mongoose.Types.ObjectId.isValid(id)) {
           return console.log({ message: "ID IS INVALID" });
         }
@@ -54,7 +53,6 @@ router.post("/createInvoice", async function (req, res, next) {
               console.log("Product not found !");
             }
             let Productz = await productModel.findById(Productdata);
-            console.log(Productz.Product_amount_in_stock, "Productz");
             let stockProduct = Productz.Product_amount_in_stock;
             let stockOrder = item.Invoice_Amount;
             stockProduct = stockProduct - stockOrder;
@@ -66,7 +64,6 @@ router.post("/createInvoice", async function (req, res, next) {
                 },
               }
             );
-            res.status(200).send({getdat:Productz,message:"OK !"})
           } catch (err) {
             console.log(err, "err");
           }
