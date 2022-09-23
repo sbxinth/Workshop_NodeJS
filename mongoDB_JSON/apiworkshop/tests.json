@@ -1,0 +1,14 @@
+{
+    "_id" : ObjectId("632d9d25dc470bdc5714f753"),
+    "name" : "Sunday",
+    "firstname" : "rachapol",
+    "lastname" : "burin",
+    "__v" : NumberInt(0)
+}
+{
+    "_id" : ObjectId("632d9d6866bfa6f5cf9a18d1"),
+    "name" : "The Sun",
+    "firstname" : "rachapol",
+    "lastname" : "burin",
+    "__v" : NumberInt(0)
+}

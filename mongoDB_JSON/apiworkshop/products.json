@@ -1,0 +1,28 @@
+{
+    "_id" : ObjectId("632d65e069d5d901bda0a547"),
+    "Product_name" : "Iphone13 Pro X",
+    "Product_detail" : [
+        {
+            "Product_detail_color" : "Blue",
+            "Product_detail_weight" : 1.5,
+            "_id" : ObjectId("632d6e066f61b87539a0dd4e")
+        }
+    ],
+    "Product_price" : NumberInt(299),
+    "Product_amount_in_stock" : NumberInt(50),
+    "__v" : NumberInt(0)
+}
+{
+    "_id" : ObjectId("632d65e669d5d901bda0a54a"),
+    "Product_name" : "Iphone13 Pro MAX",
+    "Product_detail" : [
+        {
+            "Product_detail_color" : "RED",
+            "Product_detail_weight" : 1.5,
+            "_id" : ObjectId("632d862890f2c187dbcbe514")
+        }
+    ],
+    "Product_price" : NumberInt(399),
+    "Product_amount_in_stock" : NumberInt(197),
+    "__v" : NumberInt(0)
+}

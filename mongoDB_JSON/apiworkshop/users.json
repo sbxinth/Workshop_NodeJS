@@ -1,0 +1,20 @@
+{
+    "_id" : ObjectId("632d2d17eaa8f1626ab57480"),
+    "username" : "sbxinth3",
+    "password" : "12123",
+    "firstname" : "Rachapol",
+    "lastname" : "Burinwatthana",
+    "age" : NumberInt(18),
+    "sex" : "Male",
+    "__v" : NumberInt(0)
+}
+{
+    "_id" : ObjectId("632d2d7feaa8f1626ab57489"),
+    "username" : "Thesun",
+    "password" : "12123",
+    "firstname" : "Sunday",
+    "lastname" : "SH",
+    "age" : NumberInt(18),
+    "sex" : "Male",
+    "__v" : NumberInt(0)
+}

@@ -1,0 +1,38 @@
+{
+    "_id" : ObjectId("632da198cb4aef05f930c45c"),
+    "invoices_buyerName" : "Sunday SH",
+    "invoices_itemList" : [
+        {
+            "product" : {
+                "_id" : "632d65e069d5d901bda0a547",
+                "Product_name" : "Iphone13 Pro X",
+                "Product_detail" : [
+                    {
+                        "Product_detail_color" : "Blue",
+                        "Product_detail_weight" : 1.5
+                    }
+                ],
+                "Product_price" : NumberInt(299),
+                "Product_amount_in_stock" : NumberInt(100)
+            },
+            "Invoice_Amount" : NumberInt(50)
+        },
+        {
+            "product" : {
+                "_id" : "632d65e669d5d901bda0a54a",
+                "Product_name" : "Iphone13 Pro MAX",
+                "Product_detail" : [
+                    {
+                        "Product_detail_color" : "RED",
+                        "Product_detail_weight" : 1.5
+                    }
+                ],
+                "Product_price" : NumberInt(399),
+                "Product_amount_in_stock" : NumberInt(200)
+            },
+            "Invoice_Amount" : NumberInt(3)
+        }
+    ],
+    "invoices_totalPrice" : NumberInt(698),
+    "__v" : NumberInt(0)
+}
