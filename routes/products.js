@@ -3,44 +3,6 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var ProductModel = require("../model/products_m");
 
-// console.log(test());
-// async function test() {
-//   try {
-    ///////////////// get all /////////////
-    // let Productdata = await ProductModel.find()
-    // console.log({Productdata,
-    // message : "succes"})
-
-    ///------------------dddd
-
-    // console.log(Productdata)
-    // let xxxx = Productdata.map((item)=>{
-    //     console.log(item)
-    //     let xz=item._id
-
-    //     // console.log(xz,"z")
-    //     return 
-    // })
-    // console.log(xxxx[0])
-    // console.log(xxxx[0].id)
-
-    //-------------------dddd
-    ////////////// get by id  //////////////
-    // let Productdata = await ProductModel.findById(mongoose.Types.ObjectId("632d24cdef6c679c4284c79d"))
-    // try {
-    //   if (!mongoose.Types.ObjectId.isValid(Productdata)) {
-    //     console.log("Product not found !")
-    //   }
-    //   let Productz = await ProductModel.findById(Productdata);
-    //   console.log({getdat:Productz})
-    // } catch (error) {
-    //   console.log(error.message)
-    // }
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
-
 
 router.get("/", function (req, res, next) {
   res.send("Welcome to Product router :D !");
@@ -68,7 +30,6 @@ router.post("/RegistProduct", async function (req, res, next) {
         Product_price: getBDdata.Product_price,
         Product_amount_in_stock: getBDdata.Product_amount_in_stock,
     });
-    console.log(new_register._id,"_id xxx")
 
     let NewProduct = await new_register.save();
     res.send({ data: NewProduct, message: "success !" });
@@ -100,7 +61,6 @@ router.put("/UpdateProductDataByID/:id", async function (req, res, next) {
   try {
     let uid = req.params.id;
     let getBDdata = req.body;
-    // console.log(getBDdata)
 
     await ProductModel.updateOne(
       { _id: mongoose.Types.ObjectId(uid) },

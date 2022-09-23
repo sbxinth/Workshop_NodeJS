@@ -3,29 +3,6 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var UserModel = require("../model/users_m");
 
-// console.log(test());
-// async function test() {
-//   try {
-//     ///////////////// get all /////////////
-//     // let userdata = await UserModel.find()
-//     // console.log({userdata,
-//     // message : "succes"})
-//     ////////////// get by id  //////////////
-//     // let userdata = await UserModel.findById(mongoose.Types.ObjectId("632d24cdef6c679c4284c79d"))
-//     // try {
-//     //   if (!mongoose.Types.ObjectId.isValid(userdata)) {
-//     //     console.log("User not found !")
-//     //   }
-//     //   let userz = await UserModel.findById(userdata);
-//     //   console.log({getdat:userz})
-//     // } catch (error) {
-//     //   console.log(error.message)
-//     // }
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
-
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("Welcome to User router :D !");
