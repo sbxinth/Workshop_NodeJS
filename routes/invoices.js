@@ -76,15 +76,17 @@ router.post("/createInvoice", async function (req, res, next) {
     });
     let NewInvoice = await new_invoice.save();
     res.send({
-      data: NewInvoice,
+      buyer_name : NewInvoice.invoices_buyerName,
+      total_price : NewInvoice.invoices_totalPrice,
       message: "success !",
+      Invoice_Detail: NewInvoice
     });
   } catch (error) {
     res.send(error.message);
   }
 });
 
-router.get("/getProductDataByID/:id", async function (req, res, next) {
+router.get("/getInvoiceByID/:id", async function (req, res, next) {
   try {
     let Productdata = await InvoiceModel.findById(
       mongoose.Types.ObjectId(req.params.id)
@@ -103,45 +105,30 @@ router.get("/getProductDataByID/:id", async function (req, res, next) {
   }
 });
 
-router.put("/UpdateProductDataByID/:id", async function (req, res, next) {
-  try {
-    let uid = req.params.id;
-    let getBDdata = req.body;
-    await InvoiceModel.updateOne(
-      { _id: mongoose.Types.ObjectId(uid) },
-      {
-        $set: {
-          Product_name: getBDdata.Product_name,
-          Product_detail: getBDdata.Product_detail,
-          Product_price: getBDdata.Product_price,
-          Product_amount_in_stock: getBDdata.Product_amount_in_stock,
-        },
-      }
-    );
-    let Productdata = await InvoiceModel.findById(mongoose.Types.ObjectId(uid));
-    res.status(200).send({
-      data: Productdata,
-      message: `Update Successful ! for uid = > ${uid}`,
-    });
-  } catch (error) {
-    res.send(error.message);
-  }
-});
 
-router.delete("/DeleteProductByProductID/:id", async function (req, res) {
+router.delete("/DeleteInvoiceByInvoiceID/:id", async function (req, res) {
   try {
     let id = req.params.id;
     await InvoiceModel.deleteOne({
       _id: mongoose.Types.ObjectId(id),
     });
-    let Product = await InvoiceModel.findById(mongoose.Types.ObjectId(id));
-    if (Product) {
+    let Invoicez = await InvoiceModel.findById(mongoose.Types.ObjectId(id));
+    if (Invoicez) {
       return res.status(500).send({ error: "Still have data !" });
     } else {
-      return res.status(200).send({
-        data: Product,
-        message: "delete success !",
-      });
+      if (!Invoicez){
+        return res.status(200).send({
+          data: "DATA WAS REMOVED",
+          message: "delete success !",
+        });
+      }else{
+        return res.status(200).send({
+          data: Invoicez,
+          message: "delete not success !",
+        });
+      }
+      
+
     }
   } catch (error) {
     return res.status(500).send(error.message);
