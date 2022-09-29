@@ -61,18 +61,20 @@ router.put("/UpdateProductDataByID/:id", async function (req, res, next) {
   try {
     let uid = req.params.id;
     let getBDdata = req.body;
-
+    console.log(getBDdata, 'getbdata')
     await ProductModel.updateOne(
       { _id: mongoose.Types.ObjectId(uid) },
       {
         $set: {
             Product_name: getBDdata.Product_name,
+            Product_img: getBDdata.Product_img,
             Product_detail: getBDdata.Product_detail,
             Product_price: getBDdata.Product_price,
             Product_amount_in_stock: getBDdata.Product_amount_in_stock
         }
       }
     );
+    // console.log(data, 'here new data')
 
     let Productdata = await ProductModel.findById(mongoose.Types.ObjectId(uid));
     res.status(200).send({data : Productdata,message:`Update Successful ! for uid = > ${uid}`})
