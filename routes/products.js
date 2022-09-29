@@ -24,8 +24,8 @@ router.post("/RegistProduct", async function (req, res, next) {
   try {
     let getBDdata = req.body;
     let new_register = new ProductModel({
-        _id : mongoose.Types.ObjectId(),
         Product_name: getBDdata.Product_name,
+        Product_img: getBDdata.Product_img,
         Product_detail: getBDdata.Product_detail,
         Product_price: getBDdata.Product_price,
         Product_amount_in_stock: getBDdata.Product_amount_in_stock,
