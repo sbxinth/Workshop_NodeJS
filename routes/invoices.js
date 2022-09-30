@@ -90,61 +90,24 @@ router.get("/GetAllInvoices", async function (req, res, next) {
 router.post("/createInvoice", async function (req, res, next) {
   try {
     let totalprice = 0;
-    let getBDdata = req.body;
+    let bd = req.body
+    let getBDdata = req.body.invoices_itemList;
     console.log(getBDdata,'bd data')
-
-    /// calculate total price //////
-    let getdataforcal = getBDdata.invoices_itemList;
-    getdataforcal.map((item) => {
-      totalprice += item.product.Product_price;
-    });
+        let getdataforcal = getBDdata;
+        getdataforcal.map((item) => {
+          totalprice += item.total;
+          console.log(totalprice, 'priperround')
+        });
     let new_invoice = new InvoiceModel({
       _id: mongoose.Types.ObjectId(),
-      invoices_buyerName: getBDdata.invoices_buyerName,
-      invoices_itemList: getBDdata.invoices_itemList,
+      invoices_buyerName: bd.buyername,
+      invoices_itemList: getBDdata,
       invoices_totalPrice: totalprice,
-    });
-    getdataforcal.map(async (item) => {
-      try {
-        let id = item.product._id;
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-          return console.log({ message: "ID IS INVALID" });
-        }
-        //////////// get product detail ///////////
-        try {
-          let Productdata = await productModel.findById(
-            mongoose.Types.ObjectId(id)
-          );
-          try {
-            if (!mongoose.Types.ObjectId.isValid(Productdata)) {
-              console.log("Product not found !");
-            }
-            let Productz = await productModel.findById(Productdata);
-            let stockProduct = Productz.Product_amount_in_stock;
-            let stockOrder = item.Invoice_Amount;
-            stockProduct = stockProduct - stockOrder;
-            await productModel.updateOne(
-              { _id: mongoose.Types.ObjectId(id) },
-              {
-                $set: {
-                  Product_amount_in_stock: stockProduct,
-                },
-              }
-            );
-          } catch (err) {
-            console.log(err, "err");
-          }
-        } catch (error) {
-          console.log(error.message, "error");
-        }
-      } catch (error) {
-        return console.log(error.message, "err");
-      }
     });
     let NewInvoice = await new_invoice.save();
     res.send({
-      buyer_name : NewInvoice.invoices_buyerName,
-      total_price : NewInvoice.invoices_totalPrice,
+      // buyer_name : NewInvoice.invoices_buyerName,
+      // total_price : NewInvoice.invoices_totalPrice,
       message: "success !",
       Invoice_Detail: NewInvoice
     });
@@ -152,6 +115,7 @@ router.post("/createInvoice", async function (req, res, next) {
     res.send(error.message);
   }
 });
+
 router.get("/getInvoiceByID/:id", async function (req, res, next) {
   try {
     let Productdata = await InvoiceModel.findById(
