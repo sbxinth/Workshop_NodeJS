@@ -98,6 +98,45 @@ router.post("/createInvoice", async function (req, res, next) {
           totalprice += item.total;
           console.log(totalprice, 'priperround')
         });
+          console.log(getdataforcal, 'data cal')
+        getdataforcal.map(async (item) => {
+          try {
+            let id = item.id;
+            if (!mongoose.Types.ObjectId.isValid(id)) {
+              return console.log({ message: "ID IS INVALID" });
+            }
+            //////////// get product detail ///////////
+            try {
+              let Productdata = await productModel.findById(
+                mongoose.Types.ObjectId(id)
+              );
+              try {
+                if (!mongoose.Types.ObjectId.isValid(Productdata)) {
+                  console.log("Product not found !");
+                }
+                let Productz = await productModel.findById(Productdata);
+                let stockProduct = Productz.Product_amount_in_stock;
+                let stockOrder = item.qty;
+                stockProduct = stockProduct - stockOrder;
+                // throw (err)
+                await productModel.updateOne(
+                  { _id: mongoose.Types.ObjectId(id) },
+                  {
+                    $set: {
+                      Product_amount_in_stock: stockProduct,
+                    },
+                  }
+                );
+              } catch (err) {
+                console.log(err, "err");
+              }
+            } catch (error) {
+              console.log(error.message, "error");
+            }
+          } catch (error) {
+            return console.log(error.message, "err");
+          }
+        });
     let new_invoice = new InvoiceModel({
       _id: mongoose.Types.ObjectId(),
       invoices_buyerName: bd.buyername,
