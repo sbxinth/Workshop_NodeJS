@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
-const Carts = new mongoose.Schema({
-  Carts_buyer_id: mongoose.Types.ObjectId,
-  Carts_product_id: mongoose.Types.ObjectId,
-});
+const Carts = new mongoose.Schema([{data:Object}]);
+  // id: String,
+  // name: String,
+  // price: Number,
+  // img: String,
+  // qty: Number,
+  // total: Number
 
 module.exports = mongoose.model("Carts", Carts);
