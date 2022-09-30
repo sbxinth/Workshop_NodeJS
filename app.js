@@ -56,6 +56,39 @@ app.post('/addCart',async function(req, res, next) {
     res.send(error.message);
   }
 });
+app.get('/CartData',async function(req, res, next) {
+  try {
+    let CartData = await CartModel.find();
+    res.send({
+      data: CartData,
+      message: "success to get all product !",
+    });
+  } catch (error) {
+    res.send(error.message);
+  }
+});
+app.delete('/carts/:id',async function(req, res, next) {
+
+  try {
+    let id = req.params.id
+    await CartModel.deleteOne({
+      _id : mongoose.Types.ObjectId(id)
+    })
+
+    let dat = await CartModel.findById(mongoose.Types.ObjectId(id))
+    if (dat) {
+      return res.status(500).send({error:"Still have data !"})
+    }else{
+      return res.status(200).send({
+        data:dat,
+        message:"delete success !"
+      })
+    }
+    
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
