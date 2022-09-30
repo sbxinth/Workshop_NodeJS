@@ -39,6 +39,15 @@ app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/invoices", invoicesRouter);
 
+// cart add data 
+app.post('/addCart', function(req, res, next) {
+  console.log(req.body)
+  res.status(200).send({
+    data: data,
+    message: 'success'
+  })
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
